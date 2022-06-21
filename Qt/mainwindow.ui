@@ -386,7 +386,7 @@
       <string>可以自由出行</string>
      </property>
      <property name="checkable">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QRadioButton" name="radioButton_2">
@@ -402,7 +402,7 @@
       <string>不可自由出行</string>
      </property>
      <property name="checkable">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QRadioButton" name="radioButton_3">

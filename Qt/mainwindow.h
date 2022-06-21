@@ -77,6 +77,12 @@ private slots:
 
     void on_lineEdit_2_editingFinished();
 
+    void on_radioButton_clicked();
+
+    void on_radioButton_2_clicked();
+
+    void on_radioButton_3_clicked();
+
 private:
     Ui::MainWindow *ui;
 private:

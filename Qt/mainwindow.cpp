@@ -100,6 +100,7 @@ data data_pointer;
 
 void MainWindow::on_pushButton_clicked()        //按照姓名查询
 {
+    int success=0;
     bool bOK=false;
     QString personName = QInputDialog::getText(this,
                                                tr("请输入想要查询的姓名"),
@@ -618,8 +619,20 @@ void MainWindow::on_pushButton_clicked()        //按照姓名查询
                             ttttemp=DATA_STORAGE.person_data.VACCINE.vaccine_day[3];
                             ui->lineEdit_14->insert(QString::number(ttttemp));
                         }
-                        QMessageBox::information(this,tr("程序信息"),tr("程序信息：\nbuild time:2022-06-20\nbuild os :windows11\nbuild version 2.0.0"),
-                                                 QMessageBox::Ok);
+                        success=1;
+                        //判断被搜索人员状态
+                        if(TOOLS.get_days(wYear,wMonth,wDay,DATA_STORAGE.person_data.LAST_ACID.last_time_year,DATA_STORAGE.person_data.LAST_ACID.last_time_month,DATA_STORAGE.person_data.LAST_ACID.last_time_day)<=14&&DATA_STORAGE.person_data.LAST_ACID.last_result==0&&DATA_STORAGE.person_data.STATUS_NOW.last14day_pos==0&&DATA_STORAGE.person_data.STATUS_NOW.health_code==0&&DATA_STORAGE.person_data.STATUS_NOW.is_quarantined==0&&DATA_STORAGE.person_data.STATUS_NOW.position==0)
+                        {
+                            ui->radioButton->setChecked(true);
+                            ui->radioButton_2->setChecked(false);
+                            ui->radioButton_3->setChecked(false);
+                        }
+                        else
+                        {
+                            ui->radioButton->setChecked(false);
+                            ui->radioButton_2->setChecked(true);
+                            ui->radioButton_3->setChecked(false);
+                        }
                         break;
                     }
                     else
@@ -628,7 +641,26 @@ void MainWindow::on_pushButton_clicked()        //按照姓名查询
                     DATA_STORAGE.next_person_data_pointer=&TTTEMP;
                     TTTEMP=DATA_STORAGE;
                     }
-                }    
+                }
+                //显示查询进度
+                ui->progressBar->setValue(100);
+                //显示是否查询成功
+                if(success==1)
+                {
+                    ui->lineEdit_15->setText("查询成功");
+                }
+                else if(success==0)
+                {
+                    ui->lineEdit_15->setText("查询失败");
+                }
+                else
+                {
+                    ui->lineEdit_15->setText("系统错误，请勿修改内存信息");
+                    QMessageBox::critical(this,
+                                          tr("严重错误"),
+                                          tr("内存设定出错，请检查设备或检测是否有程序篡改本程序内存"),
+                                          QMessageBox::Ok);
+                }
             }
         }
         else
@@ -845,6 +877,24 @@ void MainWindow::on_lineEdit_textEdited(const QString &arg1)
 
 
 void MainWindow::on_lineEdit_2_editingFinished()
+{
+
+}
+
+
+void MainWindow::on_radioButton_clicked()
+{
+
+}
+
+
+void MainWindow::on_radioButton_2_clicked()
+{
+
+}
+
+
+void MainWindow::on_radioButton_3_clicked()
 {
 
 }
