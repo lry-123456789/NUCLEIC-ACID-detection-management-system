@@ -1257,7 +1257,7 @@ void MainWindow::on_pushButton_11_clicked()     //修改(按照姓名修改)
                         new_file.write(vaccine_third_time.at(linelines).toUtf8());
                         new_file.write(",");
                         new_file.write(vaccine_fourth_time.at(linelines).toUtf8());
-                        new_file.write("\n");
+                        new_file.write("");
                     }
                 }
                 new_file.close();
