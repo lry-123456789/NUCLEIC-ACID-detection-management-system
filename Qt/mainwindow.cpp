@@ -776,7 +776,7 @@ void MainWindow::on_pushButton_11_clicked()     //修改(按照姓名修改)
                                              tr("未查询到相关信息"),
                                              tr("未查询到相关信息，模式自动更正为添加模式"),
                                              QMessageBox::Ok);
-
+                    /*
                     ui->lineEdit->setText("请输入姓名");
                     ui->lineEdit_2->setText("请输入性别(男，女)");
                     ui->lineEdit_3->setText("请输入上次核酸检测时间（year.month.day）");
@@ -789,7 +789,8 @@ void MainWindow::on_pushButton_11_clicked()     //修改(按照姓名修改)
                     ui->lineEdit_12->setText("请输入第二针接种时间(year.month.day)");
                     ui->lineEdit_13->setText("请输入第三针接种时间(year.month.day)");
                     ui->lineEdit_14->setText("请输入第四针接种时间(year.month.day)");
-
+                    */
+                    /*
                     qDebug()<<"set default information finished";
                     add_function=0;
                     while(add_function==0)
@@ -813,6 +814,141 @@ void MainWindow::on_pushButton_11_clicked()     //修改(按照姓名修改)
                     J1=ui->lineEdit_12->text();
                     K1=ui->lineEdit_13->text();
                     L1=ui->lineEdit_14->text();
+                    */
+                    QString A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1;
+                    A1=QInputDialog::getText(this,
+                                             tr("请输入姓名"),
+                                             tr("请输入姓名，直接填写"),
+                                             QLineEdit::Normal,
+                                             "",
+                                             &bOK);
+                    B1=QInputDialog::getText(this,
+                                             tr("请输入性别"),
+                                             tr("请输入性别"),
+                                             QLineEdit::Normal,
+                                             "",
+                                             &bOK);
+                    C1=QInputDialog::getText(this,
+                                             tr("请输入上次核酸检测时间"),
+                                             tr("示例：2022.6.21"),
+                                             QLineEdit::Normal,
+                                             "",
+                                             &bOK);
+                    D1=QInputDialog::getText(this,
+                                             tr("请输入健康码状态"),
+                                             tr("示例：绿码，黄码，红码"),
+                                             QLineEdit::Normal,
+                                             "",
+                                             &bOK);
+                    E1=QInputDialog::getText(this,
+                                             tr("请输入最近14天时候到过中高风险地区"),
+                                             tr("示例：是，否"),
+                                             QLineEdit::Normal,
+                                             "",
+                                             &bOK);
+                    F1=QInputDialog::getText(this,
+                                             tr("请输入上次核酸检测结果"),
+                                             tr("示例：阴性，阳性"),
+                                             QLineEdit::Normal,
+                                             "",
+                                             &bOK);
+                    G1=QInputDialog::getText(this,
+                                             tr("请输入时候为隔离人员"),
+                                             tr("示例：是，否"),
+                                             QLineEdit::Normal,
+                                             "",
+                                             &bOK);
+                    H1=QInputDialog::getText(this,
+                                             tr("请输入疫苗接种次数"),
+                                             tr("示例：0，1，2，3，4"),
+                                             QLineEdit::Normal,
+                                             "",
+                                             &bOK);
+                    if(H1=="0")
+                    {
+                        I1="null";
+                        J1="null";
+                        K1="null";
+                        L1="null";
+                    }
+                    else if(H1=="1")
+                    {
+                        I1=QInputDialog::getText(this,
+                                                 tr("请输入第一次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                        J1="null";
+                        K1="null";
+                        L1="null";
+                    }
+                    else if(H1=="2")
+                    {
+                        I1=QInputDialog::getText(this,
+                                                 tr("请输入第一次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                        J1=QInputDialog::getText(this,
+                                                 tr("请输入第二次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                        K1="null";
+                        L1="null";
+                    }
+                    else if(H1=="3")
+                    {
+                        I1=QInputDialog::getText(this,
+                                                 tr("请输入第一次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                        J1=QInputDialog::getText(this,
+                                                 tr("请输入第二次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                        K1=QInputDialog::getText(this,
+                                                 tr("请输入第三次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                        L1="null";
+                    }
+                    else if(H1=="4")
+                    {
+                        I1=QInputDialog::getText(this,
+                                                 tr("请输入第一次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                        J1=QInputDialog::getText(this,
+                                                 tr("请输入第二次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                        K1=QInputDialog::getText(this,
+                                                 tr("请输入第三次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                        L1=QInputDialog::getText(this,
+                                                 tr("请输入第四次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                    }
                     name.append(A1);
                     gender.append(B1);
                     detect_time.append(C1);
@@ -867,9 +1003,10 @@ void MainWindow::on_pushButton_11_clicked()     //修改(按照姓名修改)
                 else
                 {
                     QMessageBox::information(this,
-                                             tr("未查询到相关信息"),
-                                             tr("未查询到相关信息，模式自动更正为添加模式"),
+                                             tr("已经查询到相关信息"),
+                                             tr("模式自动更正为修改模式"),
                                              QMessageBox::Ok);
+                    /*
                     ui->lineEdit->setText(name.at(name_index));
                     ui->lineEdit_2->setText(gender.at(name_index));
                     ui->lineEdit_3->setText(detect_time.at(name_index));
@@ -901,6 +1038,141 @@ void MainWindow::on_pushButton_11_clicked()     //修改(按照姓名修改)
                     J1=ui->lineEdit_12->text();
                     K1=ui->lineEdit_13->text();
                     L1=ui->lineEdit_14->text();
+                    */
+                    QString A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1;
+                    A1=QInputDialog::getText(this,
+                                             tr("请输入姓名"),
+                                             tr("请输入姓名，直接填写"),
+                                             QLineEdit::Normal,
+                                             "",
+                                             &bOK);
+                    B1=QInputDialog::getText(this,
+                                             tr("请输入性别"),
+                                             tr("请输入性别"),
+                                             QLineEdit::Normal,
+                                             "",
+                                             &bOK);
+                    C1=QInputDialog::getText(this,
+                                             tr("请输入上次核酸检测时间"),
+                                             tr("示例：2022.6.21"),
+                                             QLineEdit::Normal,
+                                             "",
+                                             &bOK);
+                    D1=QInputDialog::getText(this,
+                                             tr("请输入健康码状态"),
+                                             tr("示例：绿码，黄码，红码"),
+                                             QLineEdit::Normal,
+                                             "",
+                                             &bOK);
+                    E1=QInputDialog::getText(this,
+                                             tr("请输入最近14天时候到过中高风险地区"),
+                                             tr("示例：是，否"),
+                                             QLineEdit::Normal,
+                                             "",
+                                             &bOK);
+                    F1=QInputDialog::getText(this,
+                                             tr("请输入上次核酸检测结果"),
+                                             tr("示例：阴性，阳性"),
+                                             QLineEdit::Normal,
+                                             "",
+                                             &bOK);
+                    G1=QInputDialog::getText(this,
+                                             tr("请输入时候为隔离人员"),
+                                             tr("示例：是，否"),
+                                             QLineEdit::Normal,
+                                             "",
+                                             &bOK);
+                    H1=QInputDialog::getText(this,
+                                             tr("请输入疫苗接种次数"),
+                                             tr("示例：0，1，2，3，4"),
+                                             QLineEdit::Normal,
+                                             "",
+                                             &bOK);
+                    if(H1=="0")
+                    {
+                        I1="null";
+                        J1="null";
+                        K1="null";
+                        L1="null";
+                    }
+                    else if(H1=="1")
+                    {
+                        I1=QInputDialog::getText(this,
+                                                 tr("请输入第一次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                        J1="null";
+                        K1="null";
+                        L1="null";
+                    }
+                    else if(H1=="2")
+                    {
+                        I1=QInputDialog::getText(this,
+                                                 tr("请输入第一次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                        J1=QInputDialog::getText(this,
+                                                 tr("请输入第二次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                        K1="null";
+                        L1="null";
+                    }
+                    else if(H1=="3")
+                    {
+                        I1=QInputDialog::getText(this,
+                                                 tr("请输入第一次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                        J1=QInputDialog::getText(this,
+                                                 tr("请输入第二次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                        K1=QInputDialog::getText(this,
+                                                 tr("请输入第三次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                        L1="null";
+                    }
+                    else if(H1=="4")
+                    {
+                        I1=QInputDialog::getText(this,
+                                                 tr("请输入第一次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                        J1=QInputDialog::getText(this,
+                                                 tr("请输入第二次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                        K1=QInputDialog::getText(this,
+                                                 tr("请输入第三次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                        L1=QInputDialog::getText(this,
+                                                 tr("请输入第四次疫苗接种时间"),
+                                                 tr("示例：2022.6.21"),
+                                                 QLineEdit::Normal,
+                                                 "",
+                                                 &bOK);
+                    }
                     name.append(A1);
                     gender.append(B1);
                     detect_time.append(C1);
@@ -1077,17 +1349,10 @@ void MainWindow::on_pushButton_10_clicked()     //访问我的github代码储存
 
 void MainWindow::on_pushButton_8_clicked()
 {
-    if(add_function==0)
-    {
-        add_function=1;
-    }
-    else
-    {
-        QMessageBox::information(this,
-                                 tr("提示"),
-                                 tr("不在编辑模式中，无法使用本功能"),
-                                 QMessageBox::Ok);
-    }
+    QMessageBox::information(this,
+                             tr("提示"),
+                             tr("程序提示:信息保存成功->data.txt"),
+                             QMessageBox::Ok);
 }
 
 
