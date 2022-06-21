@@ -9,6 +9,7 @@
 #include <QDateTime>
 #include <QDebug>
 #include <String>
+#include <QThread>
 #pragma comment(lib,"coredll.lib")
 int line=0;
 MainWindow::MainWindow(QWidget *parent)
@@ -23,6 +24,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+int add_function=2;     //0为正在添加，1为添加完成，可以写入数据库
 //数据存放结构体
 struct PERSON
 {
@@ -662,6 +664,7 @@ void MainWindow::on_pushButton_clicked()        //按照姓名查询
                                           QMessageBox::Ok);
                 }
             }
+            file.close();
         }
         else
         {
@@ -685,7 +688,324 @@ void MainWindow::on_pushButton_clicked()        //按照姓名查询
 
 void MainWindow::on_pushButton_11_clicked()     //修改(按照姓名修改)
 {
+    add_function=0;
+    bool bOK=false;
+    QString personName = QInputDialog::getText(this,
+                                               tr("请输入想要修改的姓名(可以用于新增，删除)"),
+                                               tr("请输入姓名"),
+                                               QLineEdit::Normal,
+                                               "",
+                                               &bOK);
+    qDebug()<<"finished the operator->name";
+    if(bOK&&!personName.isEmpty())
+    {
+        QFile file("data.txt");
+        QStringList list;   //用于逐行读取数据
+        qDebug()<<"finished the operator->create list";
+        if(file.exists())
+        {
+            qDebug()<<"operating...read files";
+            if(!file.open(QFile::ReadOnly|QFile::Text))
+            {
+               QMessageBox::critical(this,
+                                     tr("严重错误"),
+                                     tr("无法读取数据文件，请使用管理员身份运行本程序"),
+                                     QMessageBox::Ok);
+            }
+            else
+            {
+                qDebug()<<"begin to clear list";
+                name.clear();
+                gender.clear();
+                detect_time.clear();
+                health_code.clear();
+                middle_high_risk_area.clear();
+                last_detect_result.clear();
+                is_quarantined.clear();
+                vaccine_time.clear();
+                vaccine_first_time.clear();
+                vaccine_second_time.clear();
+                vaccine_third_time.clear();
+                vaccine_fourth_time.clear();
+                QTextStream in(&file);
+                QStringList list;   //用于逐行读取数据
+                line =0;
+                while(!file.atEnd())
+                {
+                    qDebug()<<"read file ......";
+                    QString strline = file.readLine();
+                    qDebug()<<strline;
+                    if(strline==""||strline=="\n")
+                    {
+                        break;
+                    }
+                    list=strline.split(",");
+                    QString A=list.at(0);
+                    name.append(A);
+                    QString B=list.at(1);
+                    gender.append(B);
+                    QString C=list.at(2);
+                    detect_time.append(C);
+                    QString D=list.at(3);
+                    health_code.append(D);
+                    QString E=list.at(4);
+                    middle_high_risk_area.append(E);
+                    QString F=list.at(5);
+                    last_detect_result.append(F);
+                    QString G=list.at(6);
+                    is_quarantined.append(G);
+                    QString H=list.at(7);
+                    vaccine_time.append(H);
+                    QString I=list.at(8);
+                    vaccine_first_time.append(I);
+                    QString J=list.at(9);
+                    vaccine_second_time.append(J);
+                    QString K=list.at(10);
+                    vaccine_third_time.append(K);
+                    QString L=list.at(11);
+                    vaccine_fourth_time.append(L);
+                }
+                file.close();
+                qDebug()<<"successfullly read the database";
+                int name_index=name.indexOf(personName);
+                qDebug()<<name_index;
+                if(name_index==-1)
+                {
+                    qDebug()<<"please input the text to the lineEdit";
+                    QMessageBox::information(this,
+                                             tr("未查询到相关信息"),
+                                             tr("未查询到相关信息，模式自动更正为添加模式"),
+                                             QMessageBox::Ok);
 
+                    ui->lineEdit->setText("请输入姓名");
+                    ui->lineEdit_2->setText("请输入性别(男，女)");
+                    ui->lineEdit_3->setText("请输入上次核酸检测时间（year.month.day）");
+                    ui->lineEdit_5->setText("请输入健康码状态(红码，绿码，黄码)");
+                    ui->lineEdit_6->setText("请输入是否到过中高风险地区(是，否))");
+                    ui->lineEdit_8->setText("请输入上次核酸检测结果(阴性，阳性)");
+                    ui->lineEdit_9->setText("请输入是否为隔离人员(是，否)");
+                    ui->lineEdit_10->setText("请输入疫苗接种次数(填写数字即可)");
+                    ui->lineEdit_11->setText("请输入第一针接种时间(year.month.day)");
+                    ui->lineEdit_12->setText("请输入第二针接种时间(year.month.day)");
+                    ui->lineEdit_13->setText("请输入第三针接种时间(year.month.day)");
+                    ui->lineEdit_14->setText("请输入第四针接种时间(year.month.day)");
+
+                    qDebug()<<"set default information finished";
+                    add_function=0;
+                    while(add_function==0)
+                    {
+                        qDebug()<<"add_function="<<add_function;
+                        ui->lineEdit_4->setText("禁止写入");
+                        ui->lineEdit_7->setText("禁止写入");
+                        QThread::msleep(1000);
+                    }
+                    qDebug()<<"information has successfully received";
+                    QString A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1;
+                    A1=ui->lineEdit->text();
+                    B1=ui->lineEdit_2->text();
+                    C1=ui->lineEdit_3->text();
+                    D1=ui->lineEdit_5->text();
+                    E1=ui->lineEdit_6->text();
+                    F1=ui->lineEdit_8->text();
+                    G1=ui->lineEdit_9->text();
+                    H1=ui->lineEdit_10->text();
+                    I1=ui->lineEdit_11->text();
+                    J1=ui->lineEdit_12->text();
+                    K1=ui->lineEdit_13->text();
+                    L1=ui->lineEdit_14->text();
+                    name.append(A1);
+                    gender.append(B1);
+                    detect_time.append(C1);
+                    health_code.append(D1);
+                    middle_high_risk_area.append(E1);
+                    last_detect_result.append(F1);
+                    is_quarantined.append(G1);
+                    vaccine_time.append(H1);
+                    if(H1=="0")
+                    {
+                        vaccine_first_time.append("null");
+                        vaccine_second_time.append("null");
+                        vaccine_third_time.append("null");
+                        vaccine_fourth_time.append("null");
+                    }
+                    else if(H1=="1")
+                    {
+                        vaccine_first_time.append(I1);
+                        vaccine_second_time.append("null");
+                        vaccine_third_time.append("null");
+                        vaccine_fourth_time.append("null");
+                    }
+                    else if(H1=="2")
+                    {
+                        vaccine_first_time.append(I1);
+                        vaccine_second_time.append(J1);
+                        vaccine_third_time.append("null");
+                        vaccine_fourth_time.append("null");
+                    }
+                    else if(H1=="3")
+                    {
+                        vaccine_first_time.append(I1);
+                        vaccine_second_time.append(J1);
+                        vaccine_third_time.append(K1);
+                        vaccine_fourth_time.append("null");
+                    }
+                    else if(H1=="4")
+                    {
+                        vaccine_first_time.append(I1);
+                        vaccine_second_time.append(J1);
+                        vaccine_third_time.append(K1);
+                        vaccine_fourth_time.append(L1);
+                    }
+                    else
+                    {
+                        QMessageBox::information(this,
+                                                 tr("程序异常"),
+                                                 tr("请输入正确的数据"),
+                                                 QMessageBox::Ok);
+                    }
+                }
+                else
+                {
+                    QMessageBox::information(this,
+                                             tr("未查询到相关信息"),
+                                             tr("未查询到相关信息，模式自动更正为添加模式"),
+                                             QMessageBox::Ok);
+                    ui->lineEdit->setText(name.at(name_index));
+                    ui->lineEdit_2->setText(gender.at(name_index));
+                    ui->lineEdit_3->setText(detect_time.at(name_index));
+                    ui->lineEdit_5->setText(health_code.at(name_index));
+                    ui->lineEdit_6->setText(middle_high_risk_area.at(name_index));
+                    ui->lineEdit_8->setText(last_detect_result.at(name_index));
+                    ui->lineEdit_9->setText(is_quarantined.at(name_index));
+                    ui->lineEdit_10->setText(vaccine_time.at(name_index));
+                    ui->lineEdit_11->setText(vaccine_first_time.at(name_index));
+                    ui->lineEdit_12->setText(vaccine_second_time.at(name_index));
+                    ui->lineEdit_13->setText(vaccine_third_time.at(name_index));
+                    ui->lineEdit_14->setText(vaccine_fourth_time.at(name_index));
+                    while(add_function==0)
+                    {
+                        ui->lineEdit_4->setText("禁止写入");
+                        ui->lineEdit_7->setText("禁止写入");
+                        QThread::msleep(10);
+                    }
+                    QString A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1;
+                    A1=ui->lineEdit->text();
+                    B1=ui->lineEdit_2->text();
+                    C1=ui->lineEdit_3->text();
+                    D1=ui->lineEdit_5->text();
+                    E1=ui->lineEdit_6->text();
+                    F1=ui->lineEdit_8->text();
+                    G1=ui->lineEdit_9->text();
+                    H1=ui->lineEdit_10->text();
+                    I1=ui->lineEdit_11->text();
+                    J1=ui->lineEdit_12->text();
+                    K1=ui->lineEdit_13->text();
+                    L1=ui->lineEdit_14->text();
+                    name.append(A1);
+                    gender.append(B1);
+                    detect_time.append(C1);
+                    health_code.append(D1);
+                    middle_high_risk_area.append(E1);
+                    last_detect_result.append(F1);
+                    is_quarantined.append(G1);
+                    vaccine_time.append(H1);
+                    if(H1=="0")
+                    {
+                        vaccine_first_time.append("null");
+                        vaccine_second_time.append("null");
+                        vaccine_third_time.append("null");
+                        vaccine_fourth_time.append("null");
+                    }
+                    else if(H1=="1")
+                    {
+                        vaccine_first_time.append(I1);
+                        vaccine_second_time.append("null");
+                        vaccine_third_time.append("null");
+                        vaccine_fourth_time.append("null");
+                    }
+                    else if(H1=="2")
+                    {
+                        vaccine_first_time.append(I1);
+                        vaccine_second_time.append(J1);
+                        vaccine_third_time.append("null");
+                        vaccine_fourth_time.append("null");
+                    }
+                    else if(H1=="3")
+                    {
+                        vaccine_first_time.append(I1);
+                        vaccine_second_time.append(J1);
+                        vaccine_third_time.append(K1);
+                        vaccine_fourth_time.append("null");
+                    }
+                    else if(H1=="4")
+                    {
+                        vaccine_first_time.append(I1);
+                        vaccine_second_time.append(J1);
+                        vaccine_third_time.append(K1);
+                        vaccine_fourth_time.append(L1);
+                    }
+                    else
+                    {
+                        QMessageBox::information(this,
+                                                 tr("程序异常"),
+                                                 tr("请输入正确的数据"),
+                                                 QMessageBox::Ok);
+                    }
+                }
+                //删除原始数据库文件，并且写一个新的文件
+                QFile source_file("data.txt");
+                source_file.remove();
+                QFile new_file("data.txt");
+                new_file.open(QIODevice::ReadWrite | QIODevice::Text);
+                int linelines=0;
+                for(linelines=0;linelines<name.count();linelines++)
+                {
+                    if(linelines!=name_index)
+                    {
+                        new_file.write(name.at(linelines).toUtf8());
+                        new_file.write(",");
+                        new_file.write(gender.at(linelines).toUtf8());
+                        new_file.write(",");
+                        new_file.write(detect_time.at(linelines).toUtf8());
+                        new_file.write(",");
+                        new_file.write(health_code.at(linelines).toUtf8());
+                        new_file.write(",");
+                        new_file.write(middle_high_risk_area.at(linelines).toUtf8());
+                        new_file.write(",");
+                        new_file.write(last_detect_result.at(linelines).toUtf8());
+                        new_file.write(",");
+                        new_file.write(is_quarantined.at(linelines).toUtf8());
+                        new_file.write(",");
+                        new_file.write(vaccine_time.at(linelines).toUtf8());
+                        new_file.write(",");
+                        new_file.write(vaccine_first_time.at(linelines).toUtf8());
+                        new_file.write(",");
+                        new_file.write(vaccine_second_time.at(linelines).toUtf8());
+                        new_file.write(",");
+                        new_file.write(vaccine_third_time.at(linelines).toUtf8());
+                        new_file.write(",");
+                        new_file.write(vaccine_fourth_time.at(linelines).toUtf8());
+                        new_file.write("\n");
+                    }
+                }
+                new_file.close();
+            }
+        }
+        else
+        {
+            QMessageBox::critical(this,
+                                     tr("错误"),
+                                     tr("未能够找到数据库文件"),
+                                     QMessageBox::Ok);
+        }
+    }
+    else
+    {
+        QMessageBox::information(this,
+                                 tr("提示"),
+                                 tr("本系统检测到用户关闭了本信息选择窗口，或者是思路的信息为空"),
+                                 QMessageBox::Ok);
+    }
 }
 
 
@@ -755,13 +1075,23 @@ void MainWindow::on_pushButton_10_clicked()     //访问我的github代码储存
 }
 
 
-void MainWindow::on_pushButton_8_clicked()      //隐藏彩蛋0->贪吃蛇
+void MainWindow::on_pushButton_8_clicked()
 {
-    QMessageBox::information(this,tr("提示"),tr("此处的彩蛋已经移动到右侧，请使用右侧按钮"),QMessageBox::Ok);
+    if(add_function==0)
+    {
+        add_function=1;
+    }
+    else
+    {
+        QMessageBox::information(this,
+                                 tr("提示"),
+                                 tr("不在编辑模式中，无法使用本功能"),
+                                 QMessageBox::Ok);
+    }
 }
 
 
-void MainWindow::on_pushButton_9_clicked()      //隐藏彩蛋1->俄罗斯方块
+void MainWindow::on_pushButton_9_clicked()      //隐藏彩蛋->俄罗斯方块
 {
     MainWindow_tetris *win =new MainWindow_tetris;
     win->show();

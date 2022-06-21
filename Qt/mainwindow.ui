@@ -616,7 +616,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>隐藏彩蛋0</string>
+      <string>保存信息</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_9">
@@ -629,7 +629,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>隐藏彩蛋1</string>
+      <string>隐藏彩蛋</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_10">
