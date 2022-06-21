@@ -853,7 +853,7 @@ void MainWindow::on_pushButton_11_clicked()     //修改(按照姓名修改)
                                              "",
                                              &bOK);
                     G1=QInputDialog::getText(this,
-                                             tr("请输入时候为隔离人员"),
+                                             tr("请输入是否为隔离人员"),
                                              tr("示例：是，否"),
                                              QLineEdit::Normal,
                                              "",
@@ -1077,7 +1077,7 @@ void MainWindow::on_pushButton_11_clicked()     //修改(按照姓名修改)
                                              "",
                                              &bOK);
                     G1=QInputDialog::getText(this,
-                                             tr("请输入时候为隔离人员"),
+                                             tr("请输入是否为隔离人员"),
                                              tr("示例：是，否"),
                                              QLineEdit::Normal,
                                              "",
@@ -1275,7 +1275,7 @@ void MainWindow::on_pushButton_11_clicked()     //修改(按照姓名修改)
     {
         QMessageBox::information(this,
                                  tr("提示"),
-                                 tr("本系统检测到用户关闭了本信息选择窗口，或者是思路的信息为空"),
+                                 tr("本系统检测到用户关闭了本信息选择窗口，或者是输入的信息为空"),
                                  QMessageBox::Ok);
     }
 }
@@ -1314,7 +1314,7 @@ void MainWindow::on_pushButton_3_clicked()      //程序初始化（所有信息
 void MainWindow::on_pushButton_4_clicked()      //显示程序版本
 {
     QMessageBox::information(this,tr("版权信息"),
-                             tr("关于：\n核酸检测管理系统\nversion:2.0.0BETA build22620\ncopyright:all rights reserved ,(c) 2020~2022 by lry and cyx\n试用版本\n"),
+                             tr("关于：\n核酸检测管理系统\nversion:3.0.0BETA build22621\ncopyright:all rights reserved ,(c) 2020~2022 by lry，cyx and lqh\n试用版本\n"),
                              QMessageBox::Ok);
 }
 
@@ -1322,14 +1322,14 @@ void MainWindow::on_pushButton_4_clicked()      //显示程序版本
 void MainWindow::on_pushButton_7_clicked()      //打开帮助chm文件
 {
     QMessageBox::information(this,tr("帮助"),
-                             tr("没有找到帮助文件"),
+                             tr("没有帮助文件,此版本暂不支持"),
                              QMessageBox::Ok);
 }
 
 
 void MainWindow::on_pushButton_5_clicked()      //显示程序信息
 {
-    QMessageBox::information(this,tr("程序信息"),tr("程序信息：\nbuild time:2022-06-20\nbuild os :windows11\nbuild version 2.0.0"),
+    QMessageBox::information(this,tr("程序信息"),tr("程序信息：\nbuild time:2022-06-21\nbuild os :windows11\nbuild version 3.0.0"),
                              QMessageBox::Ok);
 }
 
@@ -1343,7 +1343,7 @@ void MainWindow::on_pushButton_6_clicked()      //显示程序版权信息
 
 void MainWindow::on_pushButton_10_clicked()     //访问我的github代码储存库
 {
-    system("start https://github.com/lry-123456789");
+    system("start https://github.com/lry-123456789/NUCLEIC-ACID-detection-management-system");
 }
 
 
