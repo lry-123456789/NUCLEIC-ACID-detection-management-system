@@ -6,7 +6,7 @@
 LICENSE\
 README.MD\
 QT+\
-  homework.pro\
+\t  homework.pro\
   homework.pro.user\
   homework_zh_CN.ts\
   main.cpp\
