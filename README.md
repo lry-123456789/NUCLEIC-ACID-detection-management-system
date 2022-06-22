@@ -8,8 +8,8 @@
 LICENSE\
 README.MD\
 QT+\
-|  homework.pro\
-  homework.pro.user\
+>homework.pro\
+>homework.pro.user\
   homework_zh_CN.ts\
   main.cpp\
   mainwindow.cpp\
