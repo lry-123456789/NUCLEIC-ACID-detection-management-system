@@ -28,8 +28,8 @@ QT+\
   tetrisbox.cpp\
   tetrisbox.h\
   .vscode+\
-    c_cpp_properties.json\
-    launvh.json\
+  >  c_cpp_properties.json\
+  >  launvh.json\
     readme.txt\
     settings.json\
 
