@@ -1,12 +1,14 @@
 # NUCLEIC-ACID-detection-management-system
 数据结构大作业\
+
 #文件结构\
+
 编译环境：Qt6\
 文件目录：\
 LICENSE\
 README.MD\
 QT+\
-\t  homework.pro\
+|  homework.pro\
   homework.pro.user\
   homework_zh_CN.ts\
   main.cpp\
